@@ -1,6 +1,6 @@
 <?php
 
-class GitHubPluginUpdater {
+class MFMLeadsGitHubPluginUpdater {
  
     private $slug; // plugin slug
     private $pluginData; // plugin data
