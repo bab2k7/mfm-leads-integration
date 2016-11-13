@@ -3,7 +3,7 @@
  * Plugin Name: MFM Leads Integration
  * Plugin URI: http://www.monkeyfishmarketing.com  
  * Description: This plugin will allow the implementation of MFM Leads in replacement of popular WP contact forms
- * Version: 1.02
+ * Version: 1.0
  * Author: Billy Bleasdale
  * License: GPL2
  */
@@ -83,36 +83,7 @@ function mfmLeads(){
                         }
                 }
                         ?>
-                <?php 
-                //if(function_exists('ninja_forms_shortcode')){
-                    
-                ?>
-                <label for="enable-menu">Ninja Forms: </label><br />
                 
-                <?php
-                        $ninjaForms = Ninja_Forms()->form()->get_forms();
-                        
-                        /* echo "<pre>";
-                        var_dump($ninjaForms);
-                        echo "</pre>";
-                        
-                         */
-                        
-                        
-                        foreach($ninjaForms as $ninjaForm){
-                            ?>
-                            <div class="input-wrapper">
-                                <label for="enable-menu"><?php echo $ninjaForm->get_setting( 'title' ); ?>: </label>
-                                <input type="checkbox" class="form-check" id="form-id-ninja-<?php echo $ninjaForm->get_id(); ?>">
-                                Leads Code 
-                                <textarea class="leads-code-box" id="leads-code-ninja-<?php echo $ninjaForm->get_id(); ?>" value=""></textarea>
-                            </div>
-                            
-                            <?php
-                            
-                        }
-                //}
-                        ?>
                 
                 <input type="hidden" name="form-codes" id="form-codes" value='<?php echo get_option('form-codes'); ?>'>
                 <input type="hidden" name="selected-forms" id="selected-forms" value="<?php echo get_option('selected-forms'); ?>">
