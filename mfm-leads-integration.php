@@ -3,7 +3,7 @@
  * Plugin Name: MFM Leads Integration
  * Plugin URI: http://www.monkeyfishmarketing.com  
  * Description: This plugin will allow the implementation of MFM Leads in replacement of popular WP contact forms
- * Version: 1.03
+ * Version: 1.1
  * Author: Billy Bleasdale
  * License: GPL2
  */
@@ -73,9 +73,9 @@ function mfmLeads(){
                             ?>
                             <div class="input-wrapper">
                                 <label for="enable-menu"><?php echo $cf7form->post_name; ?>: </label>
-                                <input type="checkbox" class="form-check" id="form-id-cf7<?php echo $cf7form->ID; ?>">
+                                <input type="checkbox" class="form-check" id="form-id-cf7-<?php echo $cf7form->ID; ?>">
                                 Leads Code 
-                                <textarea class="leads-code-box" id="leads-code-cf7<?php echo $cf7form->ID; ?>" value=""></textarea>
+                                <textarea class="leads-code-box" id="leads-code-cf7-<?php echo $cf7form->ID; ?>" value=""></textarea>
                             </div>
                             
                             <?php
@@ -148,12 +148,14 @@ function replaceShortcode(){
         remove_shortcode('contact-form-7');
         add_shortcode("contact-form-7", function ($atts, $content, $code) {
 
-            $formId = str_replace("cf7-","",$atts['id']);
+            $formId = "cf7-".$atts['id'];
             $formTitle = $atts['title'];
-
+            
             $selectedForms = get_option('selected-forms');
             $selectedFormsArray = explode(",",$selectedForms);
-
+            
+            
+            
             if(in_array($formId,$selectedFormsArray)){
                 $formCodes = get_option('form-codes');
                 $formCodesArray = json_decode("[".$formCodes."]");
