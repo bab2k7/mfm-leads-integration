@@ -3,7 +3,7 @@
  * Plugin Name: MFM Leads Integration
  * Plugin URI: http://www.monkeyfishmarketing.com  
  * Description: This plugin will allow the implementation of MFM Leads in replacement of popular WP contact forms
- * Version: 1.0
+ * Version: 1.03
  * Author: Billy Bleasdale
  * License: GPL2
  */
