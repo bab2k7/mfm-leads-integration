@@ -3,7 +3,7 @@
  * Plugin Name: MFM Leads Integration
  * Plugin URI: http://www.monkeyfishmarketing.com  
  * Description: This plugin will allow the implementation of MFM Leads in replacement of popular WP contact forms
- * Version: 1.16
+ * Version: 1.2
  * Author: Billy Bleasdale
  * License: GPL2
  */
@@ -54,10 +54,7 @@ function mfmLeads(){
             <div class="input-wrapper">
                 <label for="enable-menu">MFM Leads Form Code: </label>
                 <br />
-                <?php 
-                if(function_exists('wpcf7_contact_form_tag_func')){
-                    
-                ?>
+                
                 <label for="enable-menu">Contact Form 7 Forms: </label><br />
                 
                 <?php
@@ -81,31 +78,8 @@ function mfmLeads(){
                             <?php
                             
                         }
-                }
-                if(function_exists('ninja_forms_uninstall')){
-                    
+                
                 ?>
-                <label for="enable-menu">Ninja Forms: </label><br />
-                
-                <?php
-                        $ninjaForms = Ninja_Forms()->form()->get_forms();
-                        
-                        
-                        
-                        foreach($ninjaForms as $ninjaForm){
-                            ?>
-                            <div class="input-wrapper">
-                                <label for="enable-menu"><?php echo $ninjaForm->get_setting( 'title' ); ?>: </label>
-                                <input type="checkbox" class="form-check" id="form-id-ninja-<?php echo $ninjaForm->get_id(); ?>">
-                                Leads Code 
-                                <textarea class="leads-code-box" id="leads-code-ninja-<?php echo $ninjaForm->get_id(); ?>" value=""></textarea>
-                            </div>
-                            
-                            <?php
-                        }
-                }
-                        ?>
-                
                 
                 <input type="hidden" name="form-codes" id="form-codes" value='<?php echo get_option('form-codes'); ?>'>
                 <input type="hidden" name="selected-forms" id="selected-forms" value="<?php echo get_option('selected-forms'); ?>">
@@ -166,7 +140,6 @@ function mfmLeads(){
 
 
 function replaceShortcode(){
-    if(function_exists('wpcf7_contact_form_tag_func')){
         remove_shortcode('contact-form-7');
         add_shortcode("contact-form-7", function ($atts, $content, $code) {
 
@@ -203,43 +176,9 @@ function replaceShortcode(){
 
             return $result;
         });
-    }
     
     
     
-    if(function_exists('Ninja_Forms')){
-        remove_shortcode('ninja_form');
-        add_shortcode("ninja_form", function ($atts, $content, $code) {
-
-            $formId = "ninja-".$atts['id'];
-            
-            $selectedForms = get_option('selected-forms');
-            $selectedFormsArray = explode(",",$selectedForms);
-            if(in_array($formId,$selectedFormsArray)){
-                $formCodes = get_option('form-codes');
-                $formCodesArray = json_decode("[".$formCodes."]");
-
-                foreach ($formCodesArray as $singleFormCode ){
-                    $singleFormCodeObj = $singleFormCode[0];
-                    if($singleFormCodeObj->formid == $formId){
-                        $result = $singleFormCodeObj->formcode;
-                    }
-                }
-            }
-            else{
-                $newAtts = shortcode_atts( array(
-                            'id' => $atts['id'],
-                            'html_id' => '',
-                            'html_name' => '',
-                            'html_class' => '',
-                            'output' => 'form' ), $atts );
-                
-                $result = Ninja_Forms()->display( 1 ) ;
-            }
-
-            return $result;
-        }); 
-    } 
     
 }
 
