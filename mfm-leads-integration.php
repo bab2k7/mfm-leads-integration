@@ -3,7 +3,7 @@
  * Plugin Name: MFM Leads Integration
  * Plugin URI: http://www.monkeyfishmarketing.com  
  * Description: This plugin will allow the implementation of MFM Leads in replacement of popular WP contact forms
- * Version: 1.21
+ * Version: 1.22
  * Author: Billy Bleasdale
  * License: GPL2
  */
@@ -51,11 +51,8 @@ function mfmLeads(){
         ?>
         <div class="tab-data tab-general active">
             <h2>General</h2>
-            <div class="input-wrapper">
-                <label for="enable-menu">MFM Leads Form Code: </label>
-                <br />
-                
-                <label for="enable-menu">Contact Form 7 Forms: </label><br />
+            <div class="input-wrapper">                
+                <h3 for="enable-menu">Contact Form 7 Forms: </h3><br />
                 
                 <?php
                                                
@@ -65,22 +62,25 @@ function mfmLeads(){
                         );
 
                         $cf7forms = get_posts( $args );
-                        
+                        ?>
+                <table>
+                        <?php 
                         foreach($cf7forms as $cf7form){
                             ?>
-                            <div class="input-wrapper">
-                                <label for="enable-menu"><?php echo $cf7form->post_name; ?>: </label>
-                                <input type="checkbox" class="form-check" id="form-id-cf7-<?php echo $cf7form->ID; ?>">
-                                Leads Code 
-                                <textarea class="leads-code-box" id="leads-code-cf7-<?php echo $cf7form->ID; ?>" value=""></textarea>
-                            </div>
+                            <tr class="input-wrapper" valign="top">
+                                <td width="120"><label for="enable-menu"><strong><?php echo $cf7form->post_name; ?>: </strong></label></td>
+                                <td width="120"><input type="checkbox" class="form-check" id="form-id-cf7-<?php echo $cf7form->ID; ?>"></td>
+                                <td width="120"><strong>Leads Code</strong></td>
+                                <td width="500"><textarea class="leads-code-box" id="leads-code-cf7-<?php echo $cf7form->ID; ?>" value="" style="width:100%;height:100px;"></textarea></td>
+                                
+                            </tr>
                             
                             <?php
                             
                         }
                 
                 ?>
-                
+                </table>
                 <input type="hidden" name="form-codes" id="form-codes" value='<?php echo get_option('form-codes'); ?>'>
                 <input type="hidden" name="selected-forms" id="selected-forms" value="<?php echo get_option('selected-forms'); ?>">
                 
