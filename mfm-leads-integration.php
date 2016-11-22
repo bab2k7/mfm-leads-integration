@@ -3,7 +3,7 @@
  * Plugin Name: MFM Leads Integration
  * Plugin URI: http://www.monkeyfishmarketing.com  
  * Description: This plugin will allow the implementation of MFM Leads in replacement of popular WP contact forms
- * Version: 1.22
+ * Version: 1.23
  * Author: Billy Bleasdale
  * License: GPL2
  */
@@ -68,7 +68,7 @@ function mfmLeads(){
                         foreach($cf7forms as $cf7form){
                             ?>
                             <tr class="input-wrapper" valign="top">
-                                <td width="120"><label for="enable-menu"><strong><?php echo $cf7form->post_name; ?>: </strong></label></td>
+                                <td width="300"><label for="enable-menu" title=""><strong>Form ID <?php echo $cf7form->ID; ?> (<?php echo $cf7form->post_name; ?>): </strong></label></td>
                                 <td width="120"><input type="checkbox" class="form-check" id="form-id-cf7-<?php echo $cf7form->ID; ?>"></td>
                                 <td width="120"><strong>Leads Code</strong></td>
                                 <td width="500"><textarea class="leads-code-box" id="leads-code-cf7-<?php echo $cf7form->ID; ?>" value="" style="width:100%;height:100px;"></textarea></td>
